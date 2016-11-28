@@ -5,8 +5,10 @@ pygame.init()
 
 pygame.display.set_caption('Finding Nemo')
 
-# pygame.mixer.init()
-# pygame.mixer.music.load("Just-keep-swimming-swimming-swimming.mp3")
+pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
+
+sharkbite = pygame.mixer.Sound("chomp.wav")
+find_nemo = pygame.mixer.Sound("yay.wav")
 # pygame.mixer.music.play(-1)
 
 black = (0,0,0)
@@ -81,34 +83,44 @@ while not gameExit:
 			Marlin.rect.x -= 10
 			Bruce.rect.x += 20
 			if pygame.sprite.collide_rect(Marlin,Bruce):
+				pygame.mixer.Sound.play(sharkbite, loops = 0)
 				print("GAME OVER")
 			if pygame.sprite.collide_rect(Marlin, Nemo):
+				pygame.mixer.Sound.play(find_nemo, loops = 0)
 				print("YOU FOUND NEMO!")
+
 
 		if event.key == pygame.K_RIGHT and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
 			Marlin.rect.x += 10
 			Bruce.rect.x -= 20
 			if pygame.sprite.collide_rect(Marlin,Bruce):
+				pygame.mixer.Sound.play(sharkbite, loops = 0)
 				print("GAME OVER")
 			if pygame.sprite.collide_rect(Marlin, Nemo):
+				pygame.mixer.Sound.play(find_nemo, loops = 0)
 				print("YOU FOUND NEMO!")
 
 		if event.key == pygame.K_UP and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
 			Marlin.rect.y -= 10
 			Bruce.rect.y -= 20
 			if pygame.sprite.collide_rect(Marlin,Bruce):
+				pygame.mixer.Sound.play(sharkbite, loops = 0)
 				print("GAME OVER")
 			if pygame.sprite.collide_rect(Marlin, Nemo):
+				pygame.mixer.Sound.play(find_nemo, loops = 0)
 				print("YOU FOUND NEMO!")
 
 		if event.key == pygame.K_DOWN and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
 			Marlin.rect.y += 10
 			Bruce.rect.y += 20	
 			if pygame.sprite.collide_rect(Marlin,Bruce):
+				pygame.mixer.Sound.play(sharkbite, loops = 0)
 				print("GAME OVER")
 			if pygame.sprite.collide_rect(Marlin, Nemo):
+				pygame.mixer.Sound.play(find_nemo, loops = 0)
 				print("YOU FOUND NEMO!")
 	
+
 	screen.blit(background_img, backgroundRect)
 	
 	sprite_group.draw(screen)
