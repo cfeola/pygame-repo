@@ -1,6 +1,7 @@
 
 import pygame
 
+
 pygame.init()
 
 pygame.display.set_caption('Finding Nemo')
@@ -9,15 +10,16 @@ pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
 
 sharkbite = pygame.mixer.Sound("chomp.wav")
 find_nemo = pygame.mixer.Sound("yay.wav")
-# pygame.mixer.music.play(-1)
 
 black = (0,0,0)
 white = (255,255,255)
 
+font = pygame.font.SysFont(None, 40)
 clock = pygame.time.Clock()
+frame_count = 0 
+frame_rate = 25
+start_time = 60
 
-# time = 100 
-# pygame.time.set_timer(pygame.KEYDOWN + 1, 1000)
 
 class Marlin(pygame.sprite.Sprite):
 	def __init__(self):
@@ -76,7 +78,6 @@ while not gameExit:
 
 	sprite_group.update()
 	
-
 	if event.type == pygame.KEYDOWN:
 		
 		if event.key == pygame.K_LEFT and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
@@ -125,14 +126,28 @@ while not gameExit:
 	
 	sprite_group.draw(screen)
 	
+	# Timer
+	total_time = start_time - (frame_count // frame_rate)
+	
+	if total_time == 0:
+		font = pygame.font.SysFont(None, 50)
+		game_over_string = "GAME OVER"
+		game_over_text = font.render(game_over_string, True, black)
+		screen.blit(game_over_text, [250,150])
+		print("GAME OVER")
+		gameExit = True
+		
+	minutes = total_time // 60
+	seconds = total_time % 60
+	time_string = "{0:02}:{1:02}".format(minutes, seconds)
+	time_text = font.render(time_string, True, black)
+	screen.blit(time_text, [315,0])
+	frame_count += 1
+	clock.tick(frame_rate)
+	
+	pygame.display.update()
 	pygame.display.flip()
 
-	# hit = pygame.sprite.spritecollide(fish_img, bruce_img, True)
-	# if hit:
-	# 	gameExit = True
-
-	pygame.display.update()
-	clock.tick(25)
 
 pygame.quit()
 quit()
