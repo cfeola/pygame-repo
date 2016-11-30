@@ -100,12 +100,23 @@ while not gameExit:
 			if pygame.sprite.collide_rect(Marlin,Bruce):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
+				font = pygame.font.SysFont(None, 75)
+				game_over_string = "GAME OVER"
+				game_over_text = font.render(game_over_string, True, white)
+				screen.blit(game_over_text, [200,150])
+				pygame.display.flip()
 				print("GAME OVER")
+				exit()
 			if pygame.sprite.collide_rect(Marlin, Nemo):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(find_nemo, loops = 0)
+				font = pygame.font.SysFont(None, 75)
+				you_found_nemo_string = "YOU FOUND NEMO!"
+				you_found_nemo_text = font.render(you_found_nemo_string, True, white)
+				screen.blit(you_found_nemo_text, [100,150])
+				pygame.display.flip()
 				print("YOU FOUND NEMO!")
-
+				exit()
 
 		if event.key == pygame.K_RIGHT and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
 			Marlin.rect.x += 10
@@ -113,11 +124,23 @@ while not gameExit:
 			if pygame.sprite.collide_rect(Marlin,Bruce):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
+				font = pygame.font.SysFont(None, 75)
+				game_over_string = "GAME OVER"
+				game_over_text = font.render(game_over_string, True, white)
+				screen.blit(game_over_text, [200,150])
+				pygame.display.flip()
 				print("GAME OVER")
+				exit()
 			if pygame.sprite.collide_rect(Marlin, Nemo):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(find_nemo, loops = 0)
+				font = pygame.font.SysFont(None, 75)
+				you_found_nemo_string = "YOU FOUND NEMO!"
+				you_found_nemo_text = font.render(you_found_nemo_string, True, white)
+				screen.blit(you_found_nemo_text, [100,150])
+				pygame.display.flip()
 				print("YOU FOUND NEMO!")
+				exit()
 
 		if event.key == pygame.K_UP and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
 			Marlin.rect.y -= 10
@@ -125,11 +148,23 @@ while not gameExit:
 			if pygame.sprite.collide_rect(Marlin,Bruce):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
+				font = pygame.font.SysFont(None, 75)
+				game_over_string = "GAME OVER"
+				game_over_text = font.render(game_over_string, True, white)
+				screen.blit(game_over_text, [200,150])
+				pygame.display.flip()
 				print("GAME OVER")
+				exit()
 			if pygame.sprite.collide_rect(Marlin, Nemo):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(find_nemo, loops = 0)
+				font = pygame.font.SysFont(None, 75)
+				you_found_nemo_string = "YOU FOUND NEMO!"
+				you_found_nemo_text = font.render(you_found_nemo_string, True, white)
+				screen.blit(you_found_nemo_text, [100,150])
+				pygame.display.flip()
 				print("YOU FOUND NEMO!")
+				exit()
 
 		if event.key == pygame.K_DOWN and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
 			Marlin.rect.y += 10
@@ -137,12 +172,23 @@ while not gameExit:
 			if pygame.sprite.collide_rect(Marlin,Bruce):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
+				font = pygame.font.SysFont(None, 75)
+				game_over_string = "GAME OVER"
+				game_over_text = font.render(game_over_string, True, white)
+				screen.blit(game_over_text, [200,150])
+				pygame.display.flip()
 				print("GAME OVER")
+				exit()
 			if pygame.sprite.collide_rect(Marlin, Nemo):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(find_nemo, loops = 0)
+				font = pygame.font.SysFont(None, 75)
+				you_found_nemo_string = "YOU FOUND NEMO!"
+				you_found_nemo_text = font.render(you_found_nemo_string, True, white)
+				screen.blit(you_found_nemo_text, [100,150])
+				pygame.display.flip()
 				print("YOU FOUND NEMO!")
-	
+				exit()
 
 	screen.blit(background_img, backgroundRect)
 	
