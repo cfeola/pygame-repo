@@ -1,5 +1,6 @@
 
 import pygame
+import random
 
 
 pygame.init()
@@ -8,6 +9,7 @@ pygame.display.set_caption('Finding Nemo')
 
 pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
 
+background_music = pygame.mixer.Sound("Just-keep-swimming-swimming-swimming_2_.wav")
 sharkbite = pygame.mixer.Sound("chomp.wav")
 find_nemo = pygame.mixer.Sound("yay.wav")
 
@@ -20,11 +22,10 @@ frame_count = 0
 frame_rate = 25
 start_time = 60
 
-
 class Marlin(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
-		self.image = pygame.image.load('fish.gif')
+		self.image = pygame.image.load('fish.bmp')
 		self.image = pygame.transform.scale(self.image, (100,50))
 		self.rect = self.image.get_rect()
 		self.rect.x = 70
@@ -33,7 +34,7 @@ class Marlin(pygame.sprite.Sprite):
 class Bruce(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
-		self.image = pygame.image.load('bruce_shark.gif')
+		self.image = pygame.image.load('bruce_shark.bmp')
 		self.image = pygame.transform.scale(self.image, (200,110))
 		self.rect = self.image.get_rect()
 		self.rect.x = 500
@@ -42,18 +43,25 @@ class Bruce(pygame.sprite.Sprite):
 class Nemo(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
-		self.image = pygame.image.load('nemo3.gif')
+		self.image = pygame.image.load('nemo3.bmp')
 		self.image = pygame.transform.scale(self.image, (55,40))
 		self.rect = self.image.get_rect()
 		self.rect.x = 620
 		self.rect.y = 310
 
+class Dory(pygame.sprite.Sprite):
+	def __init__(self):
+		super().__init__()
+		self.image = pygame.image.load('Dory.bmp')
+		self.image = pygame.transform.scale(self.image, (70,70))
+		self.rect = self.image.get_rect()
+		self.rect.x = 20
+		self.rect.y = 290
 
-background_img = pygame.image.load('Anemone.jpg')
+background_img = pygame.image.load('Anemone.bmp')
 backgroundRect = background_img.get_rect()
 size = (width, height) = background_img.get_size()
 screen = pygame.display.set_mode(size)
-
 
 sprite_group = pygame.sprite.Group()
 
@@ -69,7 +77,13 @@ sprite_group.add(Bruce)
 Nemo = Nemo()
 sprite_group.add(Nemo)
 
+# Create Dory 
+Dory = Dory()
+sprite_group.add(Dory)
+
 gameExit = False
+
+pygame.mixer.Sound.play(background_music, loops = -1)
 
 while not gameExit:
 	for event in pygame.event.get():
@@ -84,9 +98,11 @@ while not gameExit:
 			Marlin.rect.x -= 10
 			Bruce.rect.x += 20
 			if pygame.sprite.collide_rect(Marlin,Bruce):
+				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
 				print("GAME OVER")
 			if pygame.sprite.collide_rect(Marlin, Nemo):
+				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(find_nemo, loops = 0)
 				print("YOU FOUND NEMO!")
 
@@ -95,9 +111,11 @@ while not gameExit:
 			Marlin.rect.x += 10
 			Bruce.rect.x -= 20
 			if pygame.sprite.collide_rect(Marlin,Bruce):
+				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
 				print("GAME OVER")
 			if pygame.sprite.collide_rect(Marlin, Nemo):
+				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(find_nemo, loops = 0)
 				print("YOU FOUND NEMO!")
 
@@ -105,9 +123,11 @@ while not gameExit:
 			Marlin.rect.y -= 10
 			Bruce.rect.y -= 20
 			if pygame.sprite.collide_rect(Marlin,Bruce):
+				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
 				print("GAME OVER")
 			if pygame.sprite.collide_rect(Marlin, Nemo):
+				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(find_nemo, loops = 0)
 				print("YOU FOUND NEMO!")
 
@@ -115,9 +135,11 @@ while not gameExit:
 			Marlin.rect.y += 10
 			Bruce.rect.y += 20	
 			if pygame.sprite.collide_rect(Marlin,Bruce):
+				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
 				print("GAME OVER")
 			if pygame.sprite.collide_rect(Marlin, Nemo):
+				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(find_nemo, loops = 0)
 				print("YOU FOUND NEMO!")
 	
@@ -135,6 +157,7 @@ while not gameExit:
 		game_over_text = font.render(game_over_string, True, black)
 		screen.blit(game_over_text, [250,150])
 		print("GAME OVER")
+		total_time = 60
 		gameExit = True
 		
 	minutes = total_time // 60
@@ -144,7 +167,7 @@ while not gameExit:
 	screen.blit(time_text, [315,0])
 	frame_count += 1
 	clock.tick(frame_rate)
-	
+
 	pygame.display.update()
 	pygame.display.flip()
 
