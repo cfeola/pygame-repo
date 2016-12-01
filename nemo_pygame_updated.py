@@ -91,6 +91,7 @@ gameExit = False
 # Plays background music throughout the duration of the game 
 pygame.mixer.Sound.play(background_music, loops = -1)
 
+# While the game is not over, execute the following code 
 while not gameExit:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -100,7 +101,6 @@ while not gameExit:
 	
 	# When the user presses the arrow keys, the Marlin and Bruce sprites move in coordination
 	if event.type == pygame.KEYDOWN:
-		
 		# Move the sprites so long as they don't collide with each other
 		if event.key == pygame.K_LEFT and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
 			# Detects if the sprites go off of the screen - if they do go off of the screen, they are repositioned to their starting positions 
@@ -113,6 +113,7 @@ while not gameExit:
 			else:
 				Marlin.rect.x -= 10
 				Bruce.rect.x += 20
+
 			# If the Marlin and Bruce sprites collide, the game is lost. 
 			if pygame.sprite.collide_rect(Marlin,Bruce):
 				pygame.mixer.Sound.stop(background_music)
@@ -250,7 +251,8 @@ while not gameExit:
 		pygame.display.flip()
 		print("GAME OVER")
 		exit()
-		
+
+	# Decreases time 	
 	minutes = total_time // 60
 	seconds = total_time % 60
 	time_string = "{0:02}:{1:02}".format(minutes, seconds)
@@ -259,9 +261,10 @@ while not gameExit:
 	frame_count += 1
 	clock.tick(frame_rate)
 
+	# Updates display 
 	pygame.display.update()
 	pygame.display.flip()
 
-
+# Quits out of pygame window 
 pygame.quit()
 quit()
