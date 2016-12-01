@@ -1,7 +1,5 @@
 
 import pygame
-import random
-
 
 pygame.init()
 
@@ -20,7 +18,7 @@ font = pygame.font.SysFont(None, 40)
 clock = pygame.time.Clock()
 frame_count = 0 
 frame_rate = 25
-start_time = 60
+start_time = 5
 
 class Marlin(pygame.sprite.Sprite):
 	def __init__(self):
@@ -95,8 +93,16 @@ while not gameExit:
 	if event.type == pygame.KEYDOWN:
 		
 		if event.key == pygame.K_LEFT and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
-			Marlin.rect.x -= 10
-			Bruce.rect.x += 20
+			if Bruce.rect.x > width:
+				Bruce.rect.x = 500
+				Bruce.rect.y = 0
+			elif Marlin.rect.x < -60:
+				Marlin.rect.x = 70
+				Marlin.rect.y = 50
+			else:
+				Marlin.rect.x -= 10
+				Bruce.rect.x += 20
+
 			if pygame.sprite.collide_rect(Marlin,Bruce):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
@@ -119,8 +125,16 @@ while not gameExit:
 				exit()
 
 		if event.key == pygame.K_RIGHT and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
-			Marlin.rect.x += 10
-			Bruce.rect.x -= 20
+			if Bruce.rect.x < -120:
+				Bruce.rect.x = 500
+				Bruce.rect.y = 0
+			elif Marlin.rect.x > width:
+				Marlin.rect.x = 70
+				Marlin.rect.y = 50
+			else:
+				Marlin.rect.x += 10
+				Bruce.rect.x -= 20
+
 			if pygame.sprite.collide_rect(Marlin,Bruce):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
@@ -143,8 +157,16 @@ while not gameExit:
 				exit()
 
 		if event.key == pygame.K_UP and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
-			Marlin.rect.y -= 10
-			Bruce.rect.y -= 20
+			if Bruce.rect.y < -120:
+				Bruce.rect.x = 500
+				Bruce.rect.y = 0
+			elif Marlin.rect.y < -60:
+				Marlin.rect.x = 70
+				Marlin.rect.y = 50				
+			else:
+				Marlin.rect.y -= 10
+				Bruce.rect.y -= 20
+
 			if pygame.sprite.collide_rect(Marlin,Bruce):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
@@ -167,8 +189,16 @@ while not gameExit:
 				exit()
 
 		if event.key == pygame.K_DOWN and not pygame.sprite.collide_rect(Marlin,Bruce) and not pygame.sprite.collide_rect(Marlin, Nemo):
-			Marlin.rect.y += 10
-			Bruce.rect.y += 20	
+			if Bruce.rect.y > height:
+				Bruce.rect.x = 500
+				Bruce.rect.y = 0
+			elif Marlin.rect.y > height:
+				Marlin.rect.x = 70
+				Marlin.rect.y = 50
+			else:
+				Marlin.rect.y += 10
+				Bruce.rect.y += 20	
+
 			if pygame.sprite.collide_rect(Marlin,Bruce):
 				pygame.mixer.Sound.stop(background_music)
 				pygame.mixer.Sound.play(sharkbite, loops = 0)
@@ -190,6 +220,7 @@ while not gameExit:
 				print("YOU FOUND NEMO!")
 				exit()
 
+			
 	screen.blit(background_img, backgroundRect)
 	
 	sprite_group.draw(screen)
@@ -200,11 +231,11 @@ while not gameExit:
 	if total_time == 0:
 		font = pygame.font.SysFont(None, 50)
 		game_over_string = "GAME OVER"
-		game_over_text = font.render(game_over_string, True, black)
+		game_over_text = font.render(game_over_string, True, white)
 		screen.blit(game_over_text, [250,150])
+		pygame.display.flip()
 		print("GAME OVER")
-		total_time = 60
-		gameExit = True
+		exit()
 		
 	minutes = total_time // 60
 	seconds = total_time % 60
