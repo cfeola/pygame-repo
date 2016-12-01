@@ -229,6 +229,7 @@ while not gameExit:
 	total_time = start_time - (frame_count // frame_rate)
 	
 	if total_time == 0:
+		pygame.mixer.Sound.stop(background_music)
 		font = pygame.font.SysFont(None, 50)
 		game_over_string = "GAME OVER"
 		game_over_text = font.render(game_over_string, True, white)
