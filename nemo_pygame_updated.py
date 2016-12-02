@@ -17,7 +17,7 @@ find_nemo = pygame.mixer.Sound("yay.wav")
 black = (0,0,0)
 white = (255,255,255)
 
-# Create clock to kepe track of time 
+# Create clock to keep track of time 
 font = pygame.font.SysFont(None, 40)
 clock = pygame.time.Clock()
 frame_count = 0 
